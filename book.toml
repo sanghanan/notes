@@ -2,3 +2,6 @@
 authors = []
 language = "en"
 src = "src"
+
+[build]
+build-dir = "docs"

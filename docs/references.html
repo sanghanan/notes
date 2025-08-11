@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>General</title>
+        <title>References</title>
 
 
         <!-- Custom HTML head -->
@@ -175,60 +175,19 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="general-info"><a class="header" href="#general-info">General Info</a></h1>
-<p>Things that I find neat or wish I'd known earlier</p>
-<ul>
-<li><code>pwd -P</code> to avoid symlinks from obscuring the true full path of the current working directory.</li>
-<li><code>diff -u file1 file2</code> for unified diff - great for patches</li>
-<li><code>head</code> shows the first 10 lines of a file.</li>
-<li>Shell variables are not passed to programs that the shell runs. However, Environment variables are. Example:</li>
-</ul>
-<pre><code class="language-sh">FOO=bar # shell variable
-export FOO # makes it an environment variable
-</code></pre>
-<ul>
-<li>The order of adding directories to <code>$PATH</code> actually matters. The shell looks through the directories in order. This means that, adding your new directory to the beginning of the path makes the shell look in it first.</li>
-<li><code>man -k &lt;keyword&gt;</code> lets you search for a manpage by keyword.</li>
-<li>manpages have <a href="https://man7.org/linux/man-pages/man7/man-pages.7.html">sections</a>. <code>ping(8)</code> &lt;- <code>8</code> is from the section <code>System commands and servers</code>. I finally know what the numbers mean :)</li>
-<li>Redirect standard output and error using <code>command &gt; file 2&gt;&amp;1</code></li>
-<li>Useful <code>ps</code> flags:</li>
-</ul>
-<pre><code class="language-sh">ps u # more info
-ps w # show full command, no truncation
-ps x # all of my running processes
-ps ax # all running processes, not just mine
-</code></pre>
-<ul>
-<li><code>kill -l</code> shows mapping of signal numbers to names.</li>
-<li><code>jobs</code> command shows any suspended processes.</li>
-<li><code>nohup</code> allows processes to live when the terminal gets killed.</li>
-<li>Useful absolute permission modes:</li>
-</ul>
-<div class="table-wrapper"><table><thead><tr><th>Mode</th><th>Used for</th><th>User</th><th>Group</th><th>Other</th></tr></thead><tbody>
-<tr><td>644</td><td>files</td><td>rw</td><td>r</td><td>r</td></tr>
-<tr><td>600</td><td>files</td><td>rw</td><td>-</td><td>-</td></tr>
-<tr><td>755</td><td>directories, programs</td><td>rwx</td><td>rx</td><td>rx</td></tr>
-<tr><td>700</td><td>directories, programs</td><td>rwx</td><td>-</td><td>-</td></tr>
-<tr><td>711</td><td>directories</td><td>rwx</td><td>x</td><td>x</td></tr>
-</tbody></table>
-</div>
-<ul>
-<li>
-<p>Note how the directories are being given execute permissions. This is because you can list the contents of the file, if it is readable, but you can only access a file in a directory, if the directory is executable.</p>
-</li>
-<li>
-<p>The kernel is generally a binary file <code>/vmlinuz</code> or <code>/boot/vmlinuz</code>. The boot-loader loads this during system boot. However, <code>/lib/modules</code> contain modules called <code>loadable kernel modules</code> that the kernel loads and unloads on demand.</p>
-</li>
-</ul>
+                        <p>References:</p>
+<ol>
+<li>How Linux Works - Brian Ward</li>
+</ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-
-                            <a rel="next prefetch" href="file_systems.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="devices.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
+
 
                         <div style="clear: both"></div>
                     </nav>
@@ -236,10 +195,10 @@ ps ax # all running processes, not just mine
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-
-                    <a rel="next prefetch" href="file_systems.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="devices.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
+
             </nav>
 
         </div>

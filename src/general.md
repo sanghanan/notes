@@ -35,5 +35,8 @@ ps ax # all running processes, not just mine
 | 700  | directories, programs | rwx  | -     | -     |
 | 711  | directories           | rwx  | x     | x     |
 
-Note how the directories are being given execute permissions. This is because you can list the contents of the file, if it is readable, but you can only access a file in a directory, if the directory is executable. 
+  - Note how the directories are being given execute permissions. This is because you can list the contents of the file, if it is readable, but you can only access a file in a directory, if the directory is executable.
+
+- The kernel is generally a binary file `/vmlinuz` or `/boot/vmlinuz`. The boot-loader loads this during system boot. However, `/lib/modules` contain modules called `loadable kernel modules` that the kernel loads and unloads on demand.
+ 
 

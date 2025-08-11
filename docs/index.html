@@ -212,13 +212,23 @@ ps ax # all running processes, not just mine
 <tr><td>711</td><td>directories</td><td>rwx</td><td>x</td><td>x</td></tr>
 </tbody></table>
 </div>
+<ul>
+<li>
 <p>Note how the directories are being given execute permissions. This is because you can list the contents of the file, if it is readable, but you can only access a file in a directory, if the directory is executable.</p>
+</li>
+<li>
+<p>The kernel is generally a binary file <code>/vmlinuz</code> or <code>/boot/vmlinuz</code>. The boot-loader loads this during system boot. However, <code>/lib/modules</code> contain modules called <code>loadable kernel modules</code> that the kernel loads and unloads on demand.</p>
+</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
 
+                            <a rel="next prefetch" href="file_systems.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -227,10 +237,29 @@ ps ax # all running processes, not just mine
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
 
+                    <a rel="next prefetch" href="file_systems.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

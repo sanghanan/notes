@@ -12,7 +12,7 @@
 #### Linux directory hierarchy
 
 Here's a [blogpost from linuxhandbook](https://linuxhandbook.com/linux-directory-structure/) explaining it. Highlights:
-- `/etc` is pronounced EHT-see, like the store and et cetera. 🤦
+- `/etc` is pronounced EHT-see, like the store and not et cetera. 🤦
 - `/tmp` is temporary files that get wiped, but `/var/tmp` isn't.
 - `/opt` is for additional third-party software. Not widely used, but the general practice is to symlink the binary from `/opt` to `/bin`.
 - `/usr/local/include` has the header files used by the C compiler.

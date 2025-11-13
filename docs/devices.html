@@ -187,7 +187,65 @@
 </li>
 </ul>
 <h4 id="dd-command"><a class="header" href="#dd-command">dd-command</a></h4>
-<p>The <a href="https://blog.kubesimplify.com/the-complete-guide-to-the-dd-command-in-linux">dd</a> command can do a looooot of things, including copying files, wiping disks, creating backups.</p>
+<p>The <a href="https://blog.kubesimplify.com/the-complete-guide-to-the-dd-command-in-linux">dd</a> command can do a looooot of things, including copying files, wiping disks, creating backups. Here's a basic command to copy data from <code>/dev/zero</code> (an endless stream of zero bytes) to <code>new_file</code>:</p>
+<pre><code class="language-sh">$ dd if=/dev/zero of=new_file bs=1024 count=1
+</code></pre>
+<ul>
+<li>
+<p><strong>if=file</strong> — Input file (defaults to standard input).</p>
+</li>
+<li>
+<p><strong>of=file</strong> — Output file (defaults to standard output).</p>
+</li>
+<li>
+<p><strong>bs=size</strong> — Block size for both reading and writing. You can use suffixes:</p>
+<ul>
+<li><code>b</code> = 512 bytes</li>
+<li><code>k</code> = 1024 bytes
+Example: <code>bs=1k</code> is the same as <code>bs=1024</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>ibs=size, obs=size</strong> — Input and output block sizes when they differ. If they’re the same, just use <code>bs</code>.</p>
+</li>
+<li>
+<p><strong>count=num</strong> — Number of blocks to copy. This prevents endless copying when the input is very large or infinite (like <code>/dev/zero</code>).</p>
+</li>
+<li>
+<p><strong>skip=num</strong> — Skip the first <em>num</em> blocks of the input before copying.</p>
+</li>
+</ul>
+<h3 id="device-names"><a class="header" href="#device-names">Device names</a></h3>
+<ul>
+<li>Device names are kind of a hassle in linux. I think they get assigned device names based on the order in which they're encountered during boot, so there is no guarantee that <code>/dev/sda</code> and <code>/dev/sdb</code> are going to point to the same device.</li>
+<li>A solid way to get the device name is to query the <code>udev</code> daemon (<code>udevd</code>) using <code>udevadm</code>.</li>
+<li>If you dont have access to <code>udevadm</code> for some reason, you could try to find the device in <code>/sys</code>, check the logs using <code>journalctl -k</code> or <code>cat /proc/devices</code>. None of these are as easy as using <code>udev</code> of course.</li>
+</ul>
+<h3 id="device-types"><a class="header" href="#device-types">Device types</a></h3>
+<p>There are a lot of types, so I'll note down the most useful ones:</p>
+<h4 id="hard-disks-devsd"><a class="header" href="#hard-disks-devsd">Hard disks: /dev/sd*</a></h4>
+<ul>
+<li>The kernel makes separate files like <code>/dev/sda</code> and <code>/dev/sdb</code> based on the partitions.</li>
+<li>The sd stands for SCSI disk, and SCSI stands for Small Computer System Interface. This is an old hardware and protocol for communication between devices. SCSI hardware is not used anymore, but the protocol was pretty good that it stuck around.</li>
+<li>USBs and SATA devices are represented using <code>sd</code>.</li>
+<li>To get a list of <code>sd</code> devices, use <code>lsscsi</code> command. Pretty sure it is supposed to mean: <code>ls scsi</code></li>
+</ul>
+<h4 id="non-volatile-memory-devices-devnvme"><a class="header" href="#non-volatile-memory-devices-devnvme">Non-Volatile Memory Devices: /dev/nvme*</a></h4>
+<ul>
+<li>Is used to talk to some SSDs.</li>
+</ul>
+<h4 id="device-mapper-devdm--devmapper"><a class="header" href="#device-mapper-devdm--devmapper">Device Mapper: /dev/dm-*, /dev/mapper/*</a></h4>
+<p>LVM uses a device mapper to create block devices?</p>
+<h3 id="creating-device-files"><a class="header" href="#creating-device-files">Creating Device Files</a></h3>
+<pre><code>mknod /dev/sda1 b 8 1
+</code></pre>
+<p>b - block device
+8 and 1 are the major and minor numbers respectively.
+The major number and minor number tell the kernel how to access the device. A common major number is assigned to all devices that are being controlled by the same device driver. The minor number helps to distinguish between the exact device type/controller using the same device driver.</p>
+<p>Don't use <code>mknod</code> though, it's a lil unstable.</p>
+<h3 id="udev"><a class="header" href="#udev">udev</a></h3>
+<p>The <code>udev</code> daemon, i.e., <code>udevd</code> is responsible for sending notifications to the user space when a new device is detected. For example, plugging in a USB device.</p>
+<p>[There's a lot more to understand about <code>udev</code> but the <code>Linux in a Nutshell</code> book pretty much told me to skip ahead until I'm more familiar with linux, so yep.]</p>
 
                     </main>
 
